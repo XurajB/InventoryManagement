@@ -2,22 +2,34 @@ package com.example.inventory.management;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener,
+		OnGestureListener {
 	TextView tvName, tvCode, tvPrice, tvQuantity, tvA;
 	EditText etName, etCode, etPrice, etQuantity, etA;
 	private ViewFlipper vf;
 	private float lastX;
 
+	private GestureDetector myGesture;
+	private static final int SWIPE_MIN_DISTANCE = 120;
+	private static final int SWIPE_MAX_OFF_PATH = 250;
+	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		myGesture = new GestureDetector(this);
 		initializeVars();
 	}
 
@@ -39,8 +51,8 @@ public class MainActivity extends Activity {
 
 	}
 
-	@Override
 	public boolean onTouchEvent(MotionEvent touchevent) {
+
 		switch (touchevent.getAction()) {
 		case MotionEvent.ACTION_DOWN: {
 			lastX = touchevent.getX();
@@ -68,4 +80,63 @@ public class MainActivity extends Activity {
 		return false;
 	}
 
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
+		try {
+			if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+				return false;
+			// right to left swipe
+			if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+				Toast.makeText(getApplicationContext(), "Left Swipe",
+						Toast.LENGTH_SHORT).show();
+			} else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
+					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+				Toast.makeText(getApplicationContext(), "Right Swipe",
+						Toast.LENGTH_SHORT).show();
+			} else if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE
+					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+				Toast.makeText(getApplicationContext(), "Swipe up",
+						Toast.LENGTH_SHORT).show();
+			} else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE
+					&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+				Toast.makeText(getApplicationContext(), "Swipe down",
+						Toast.LENGTH_SHORT).show();
+			}
+		} catch (Exception e) {
+			// nothing
+		}
+
+		return true;
+	}
+
+	public void onLongPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void onShowPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public boolean onSingleTapUp(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
+		return false;
+	}
+
+	public void onClick(DialogInterface arg0, int arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public boolean onDown(MotionEvent arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
