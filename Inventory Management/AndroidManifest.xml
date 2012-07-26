@@ -22,7 +22,15 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
-                 <action android:name="com.example.inventory.management.MAINACTIVITY" />
+                <action android:name="com.example.inventory.management.MAINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ViewInfo" >
+            <intent-filter>
+                <action android:name="com.example.inventory.management.VIEWINFO" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

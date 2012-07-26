@@ -2,12 +2,15 @@ package com.example.inventory.management;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	TextView tvName, tvCode, tvPrice, tvQuantity, tvA;
 	EditText etName, etCode, etPrice, etQuantity, etA;
 	private ViewFlipper vf;
+	Button addItem, scan;
 	private float lastX;
 
 	private GestureDetector myGesture;
@@ -31,6 +35,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		setContentView(R.layout.activity_main);
 		myGesture = new GestureDetector(this);
 		initializeVars();
+
+		
 	}
 
 	private void initializeVars() {
@@ -48,6 +54,13 @@ public class MainActivity extends Activity implements OnClickListener,
 		etPrice = (EditText) findViewById(R.id.etPrice);
 		etQuantity = (EditText) findViewById(R.id.etQuantity);
 		etA = (EditText) findViewById(R.id.etA);
+
+		addItem = (Button) findViewById(R.id.bAdd);
+		addItem.setOnClickListener(this);
+		
+		scan = (Button) findViewById(R.id.bScan);
+		addItem.setOnClickListener(this);
+
 
 	}
 
@@ -130,13 +143,28 @@ public class MainActivity extends Activity implements OnClickListener,
 		return false;
 	}
 
-	public void onClick(DialogInterface arg0, int arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public boolean onDown(MotionEvent arg0) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+		switch(arg0.getId()){
+		case R.id.bAdd:
+			String name = etName.getText().toString();
+			Bundle holder = new Bundle();
+			holder.putString("key", name);
+			Intent a = new Intent(MainActivity.this,ViewInfo.class );
+			a.putExtras(holder);
+			startActivity(a);
+			break;
+			
+		case R.id.bScan:
+			
+			break;
+		}
+
 	}
 }

@@ -13,7 +13,7 @@
             android:id="@+id/tvName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10px"
             android:text="Enter the name of the Product: "
             android:textSize="20dp" />
 
@@ -26,7 +26,7 @@
             android:id="@+id/tvCode"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10px"
             android:text="Enter the Product Code or Scan: "
             android:textSize="20dp" />
 
@@ -38,16 +38,16 @@
         <Button
             android:id="@+id/bScan"
             android:layout_width="120dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Scan"
-            android:textSize="15dp" />
+            android:text="SCAN"
+            android:textSize="10dp" />
 
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10px"
             android:text="Enter the Product Price: "
             android:textSize="20dp" />
 
@@ -60,7 +60,7 @@
             android:id="@+id/tvQuantity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10px"
             android:text="Enter the Product Quantity: "
             android:textSize="20dp" />
 
@@ -73,7 +73,7 @@
             android:id="@+id/tvA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10px"
             android:text="Enter the :"
             android:textSize="20dp" />
 
@@ -148,18 +148,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/tv5"
+        <Button
+            android:id="@+id/bAdd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
-            android:text="Enter the "
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/et5"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:text= "ADD ITEM" />
 
         <TextView
             android:id="@+id/tvPage2"
