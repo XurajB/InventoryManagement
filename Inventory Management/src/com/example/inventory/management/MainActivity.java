@@ -1,5 +1,7 @@
 package com.example.inventory.management;
 
+import com.example.inventory.db.DatabaseHelper;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -153,6 +155,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		
 		switch(arg0.getId()){
 		case R.id.bAdd:
+			addItem();
 			String name = etName.getText().toString();
 			Bundle holder = new Bundle();
 			holder.putString("key", name);
@@ -166,5 +169,14 @@ public class MainActivity extends Activity implements OnClickListener,
 			break;
 		}
 
+	}
+	private void addItem(){
+		DatabaseHelper db = new DatabaseHelper(this);
+		String productName = etName.getText().toString().trim(); //add if else to check product name
+		String productCode= etCode.getText().toString().trim(); //add if else to check product code
+		Double price = Double.parseDouble(etPrice.getText().toString().trim()) ; 
+		Integer quantity = Integer.parseInt(etQuantity.getText().toString().trim());
+		db.insertItem(productName, productCode, price, quantity);
+		db.close();
 	}
 }
