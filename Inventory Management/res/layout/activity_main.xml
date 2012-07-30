@@ -10,6 +10,33 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/tvCode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10px"
+            android:text="Enter the Product Code or Scan: "
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/etCode"
+                android:layout_width="250dp"
+                android:layout_height="fill_parent" 
+                android:singleLine="true"/>
+
+            <Button
+                android:id="@+id/bScan"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="SCAN"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/tvName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -20,28 +47,9 @@
         <EditText
             android:id="@+id/etName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tvCode"
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10px"
-            android:text="Enter the Product Code or Scan: "
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/etCode"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/bScan"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="SCAN"
-            android:textSize="10dp" />
+            android:inputType="text"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/tvPrice"
@@ -54,7 +62,9 @@
         <EditText
             android:id="@+id/etPrice"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/tvQuantity"
@@ -67,7 +77,9 @@
         <EditText
             android:id="@+id/etQuantity"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" 
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/tvA"
@@ -80,7 +92,8 @@
         <EditText
             android:id="@+id/etA"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" 
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/tvPage1"
@@ -107,7 +120,8 @@
         <EditText
             android:id="@+id/et1"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/tv2"
@@ -152,7 +166,7 @@
             android:id="@+id/bAdd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text= "ADD ITEM" />
+            android:text="ADD ITEM" />
 
         <TextView
             android:id="@+id/tvPage2"

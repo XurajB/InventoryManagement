@@ -1,25 +1,21 @@
 package com.example.inventory.management;
 
-import com.example.inventory.db.DatabaseHelper;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-
+import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-public class MainActivity extends Activity implements OnClickListener,
-		OnGestureListener {
+import com.example.inventory.db.DatabaseHelper;
+
+public class MainActivity extends Activity implements OnGestureListener {
 	TextView tvName, tvCode, tvPrice, tvQuantity, tvA;
 	EditText etName, etCode, etPrice, etQuantity, etA;
 	private ViewFlipper vf;
@@ -38,7 +34,6 @@ public class MainActivity extends Activity implements OnClickListener,
 		myGesture = new GestureDetector(this);
 		initializeVars();
 
-		
 	}
 
 	private void initializeVars() {
@@ -58,11 +53,22 @@ public class MainActivity extends Activity implements OnClickListener,
 		etA = (EditText) findViewById(R.id.etA);
 
 		addItem = (Button) findViewById(R.id.bAdd);
-		addItem.setOnClickListener(this);
-		
-		scan = (Button) findViewById(R.id.bScan);
-		addItem.setOnClickListener(this);
+		addItem.setOnClickListener(new View.OnClickListener() {
 
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				saveToData();
+			}
+		});
+
+		scan = (Button) findViewById(R.id.bScan);
+		scan.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startScan();
+			}
+		});
 
 	}
 
@@ -150,33 +156,58 @@ public class MainActivity extends Activity implements OnClickListener,
 		return false;
 	}
 
-	public void onClick(View arg0) {
+	public void saveToData() {
+		addItem();
+		String name = etName.getText().toString();
+		Bundle holder = new Bundle();
+		holder.putString("key", name);
+		Intent a = new Intent(MainActivity.this, ViewInfo.class);
+		a.putExtras(holder);
+		startActivity(a);
+	}
+
+	public void startScan() {
 		// TODO Auto-generated method stub
-		
-		switch(arg0.getId()){
-		case R.id.bAdd:
-			addItem();
-			String name = etName.getText().toString();
-			Bundle holder = new Bundle();
-			holder.putString("key", name);
-			Intent a = new Intent(MainActivity.this,ViewInfo.class );
-			a.putExtras(holder);
-			startActivity(a);
-			break;
-			
-		case R.id.bScan:
-			
-			break;
-		}
+
+		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+		intent.putExtra("com.google.zxing.client.android.SCAN.SCAN_MODE",
+				"QR_CODE_MODE");
+		startActivityForResult(intent, 0);
 
 	}
-	private void addItem(){
+
+	private void addItem() {
 		DatabaseHelper db = new DatabaseHelper(this);
-		String productName = etName.getText().toString().trim(); //add if else to check product name
-		String productCode= etCode.getText().toString().trim(); //add if else to check product code
-		Double price = Double.parseDouble(etPrice.getText().toString().trim()) ; 
-		Integer quantity = Integer.parseInt(etQuantity.getText().toString().trim());
+		String productName = etName.getText().toString().trim(); // add if else
+																	// to check
+																	// product
+																	// name
+		String productCode = etCode.getText().toString().trim(); // add if else
+																	// to check
+																	// product
+																	// code
+		Double price = Double.parseDouble(etPrice.getText().toString().trim());
+		Integer quantity = Integer.parseInt(etQuantity.getText().toString()
+				.trim());
 		db.insertItem(productName, productCode, price, quantity);
 		db.close();
+	}
+
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == 0) {
+			if (resultCode == RESULT_OK) {
+				String contents = intent.getStringExtra("SCAN_RESULT");
+				// String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+				populateScan(contents);
+				// Handle successful scan
+			} else if (resultCode == RESULT_CANCELED) {
+				// Handle cancel
+			}
+		}
+	}
+
+	private void populateScan(String contents) {
+		// TODO Auto-generated method stub
+		etCode.setText(contents);
 	}
 }
