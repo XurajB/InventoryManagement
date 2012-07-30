@@ -26,7 +26,7 @@ public class StartPage extends Activity {
 			
 		};
 		time.start();
-		time.
+		
 	}
 
 }
