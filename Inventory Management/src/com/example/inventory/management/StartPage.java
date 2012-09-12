@@ -19,13 +19,14 @@ public class StartPage extends Activity {
 				}catch(InterruptedException e){
 					e.printStackTrace();
 				}finally{
-					Intent openMainActivity = new Intent("com.example.inventory.management.MAINACTIVITY");
-					startActivity(openMainActivity);
+					Intent openMenu = new Intent("com.example.inventory.management.MENU");
+					startActivity(openMenu);
 				}
 			}
 			
 		};
 		time.start();
+		
 		
 	}
 

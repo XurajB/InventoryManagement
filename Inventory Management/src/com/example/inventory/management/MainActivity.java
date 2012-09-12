@@ -19,7 +19,7 @@ public class MainActivity extends Activity implements OnGestureListener {
 	TextView tvName, tvCode, tvPrice, tvQuantity, tvA;
 	EditText etName, etCode, etPrice, etQuantity, etA;
 	private ViewFlipper vf;
-	Button addItem, scan;
+	Button summary, scan;
 	private float lastX;
 
 	private GestureDetector myGesture;
@@ -52,12 +52,12 @@ public class MainActivity extends Activity implements OnGestureListener {
 		etQuantity = (EditText) findViewById(R.id.etQuantity);
 		etA = (EditText) findViewById(R.id.etA);
 
-		addItem = (Button) findViewById(R.id.bAdd);
-		addItem.setOnClickListener(new View.OnClickListener() {
+		summary = (Button) findViewById(R.id.bSummary);
+		summary.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				saveToData();
+				summary();
 			}
 		});
 
@@ -156,11 +156,24 @@ public class MainActivity extends Activity implements OnGestureListener {
 		return false;
 	}
 
-	public void saveToData() {
-		addItem();
-		String name = etName.getText().toString();
+	
+
+	private void summary() {
+		// TODO Auto-generated method stub
+		String productName = etName.getText().toString().trim(); // add if else
+		// to check
+		// product
+		// name
+		//String productCode = etCode.getText().toString().trim(); // add if else
+		// to check
+		// product
+		// code
+		//Double price = Double.parseDouble(etPrice.getText().toString().trim());
+		//Integer quantity = Integer.parseInt(etQuantity.getText().toString()
+				//.trim());
+		
 		Bundle holder = new Bundle();
-		holder.putString("key", name);
+		holder.putString("key", productName);
 		Intent a = new Intent(MainActivity.this, ViewInfo.class);
 		a.putExtras(holder);
 		startActivity(a);
@@ -176,22 +189,7 @@ public class MainActivity extends Activity implements OnGestureListener {
 
 	}
 
-	private void addItem() {
-		DatabaseHelper db = new DatabaseHelper(this);
-		String productName = etName.getText().toString().trim(); // add if else
-																	// to check
-																	// product
-																	// name
-		String productCode = etCode.getText().toString().trim(); // add if else
-																	// to check
-																	// product
-																	// code
-		Double price = Double.parseDouble(etPrice.getText().toString().trim());
-		Integer quantity = Integer.parseInt(etQuantity.getText().toString()
-				.trim());
-		db.insertItem(productName, productCode, price, quantity);
-		db.close();
-	}
+	
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
